@@ -16,7 +16,7 @@ class Human
     $enemy->tookDamage($this->attackPoint);
   }
 
-  public function tookDamege($damage)
+  public function tookDamage($damage)
   {
     $this->hitPoint -= $damage;
     if ($this->hitPoint < 0){
