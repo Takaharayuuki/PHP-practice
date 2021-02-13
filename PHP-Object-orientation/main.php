@@ -31,25 +31,9 @@ while (!$isFinishFlg) {
   $messageObj->displayStatusMessage($enemies);
 
   // 攻撃
-  foreach ($members as $member) {
-    $enemyIndex = rand(0, count($enemies) - 1);
-    $enemy = $enemies[$enemyIndex];
+  $messageObj->displayAttackMessage($members, $enemies);
 
-    if (get_class($member) == "WhiteMage") {
-      $member->doAttackWhiteMage($enemies, $members);
-    } else {
-      $member->doAttack($enemies);
-    }
-    echo "\n";
-  }
-  echo "\n";
-
-  foreach ($enemies as $enemy) {
-    $memberIndex = rand(0, count($members) - 1);
-    $member = $members[$memberIndex];
-    $enemy->doAttack($members);
-    echo "\n";
-  }
+  $messageObj->displayAttackMessage($enemies, $members);
 
   $deathCnt = 0;
   foreach ($members as $member) {
