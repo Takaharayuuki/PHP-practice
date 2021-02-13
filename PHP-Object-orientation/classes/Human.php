@@ -32,6 +32,14 @@ class Human
     }
   }
 
+  public function recoveryDamage($heal, $target)
+  {
+    $this->hitPoint += $heal;
+    if ($this->hitPoint > $target::MAX_HITPOINT) {
+      $this->hitPoint = $target::MAX_HITPOINT;
+    }
+  }
+
   // privateのプロパティを取得する為のアクセサーメソッドをゲッターという
   public function getName()
   {

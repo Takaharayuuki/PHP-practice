@@ -8,9 +8,10 @@ class Enemy
   private $attackPoint = 10;
 
   // メソッド
-  public function __construct($name)
+  public function __construct($name, $attackPoint)
   {
-    return $this->name = $name;
+    $this->name = $name;
+    $this->attackPoint = $attackPoint;
   }
 
   public function doAttack($human)
