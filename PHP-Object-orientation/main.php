@@ -5,6 +5,7 @@ require_once('./classes/Enemy.php');
 require_once('./classes/Brave.php');
 require_once('./classes/BlackMage.php');
 require_once('./classes/WhiteMage.php');
+require_once('./classes/Message.php');
 
 // インスタンス化
 $members = array();
@@ -20,17 +21,14 @@ $enemies[] = new Enemy('モルボル', 30);
 $turn = 1;
 $isFinishFlg = false;
 
+$messageObj = new Message;
+
 while (!$isFinishFlg) {
   echo "*** $turn ターン目 ***\n\n";
 
   // const定数で定義した値を参照する場合は $tiida::MAX_HITPOINT のように -> ではなく :: で参照する
-  foreach ($members as $member) {
-    echo $member->getName() . ":" . $member->getHitPoint() . "/" . $member::MAX_HITPOINT . "\n";
-  }
-  foreach ($enemies as $enemy) {
-    echo $enemy->getName() . ":" . $enemy->getHitPoint() . "/" . $enemy::MAX_HITPOINT . "\n";
-  }
-  echo "\n";
+  $messageObj->displayStatusMessage($members);
+  $messageObj->displayStatusMessage($enemies);
 
   // 攻撃
   foreach ($members as $member) {
@@ -38,7 +36,7 @@ while (!$isFinishFlg) {
     $enemy = $enemies[$enemyIndex];
 
     if (get_class($member) == "WhiteMage") {
-      $member->doAttackWhiteMage($enemy, $members);
+      $member->doAttackWhiteMage($enemies, $members);
     } else {
       $member->doAttack($enemies);
     }
@@ -85,9 +83,5 @@ while (!$isFinishFlg) {
 }
 
 echo "終了\n";
-foreach ($members as $member) {
-  echo $member->getName() . " : " . $member->getHitPoint() . "/" . $member::MAX_HITPOINT . "\n";
-}
-foreach ($enemies as $enemy) {
-  echo $enemy->getName() . " : " . $enemy->getHitPoint() . "/" . $enemy::MAX_HITPOINT . "\n";
-}
+$messageObj->displayStatusMessage($members);
+$messageObj->displayStatusMessage($menemies);
