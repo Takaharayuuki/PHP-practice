@@ -1,5 +1,6 @@
 <?php
 //ファイルのロード
+require_once('./classes/Lives.php');
 require_once('./classes/Human.php');
 require_once('./classes/Enemy.php');
 require_once('./classes/Brave.php');
@@ -23,6 +24,21 @@ $isFinishFlg = false;
 
 $messageObj = new Message;
 
+function isFinish($objects)
+{
+  $deathCnt = 0;
+  foreach ($objects as $object) {
+    if ($object->getHitPoint() > 0) {
+      $isFinishFlg = false;
+      break;
+    }
+    $deathCnt++;
+  }
+  if ($deathCnt === count($objects)) {
+    return true;
+  }
+}
+
 while (!$isFinishFlg) {
   echo "*** $turn ターン目 ***\n\n";
 
@@ -35,37 +51,22 @@ while (!$isFinishFlg) {
 
   $messageObj->displayAttackMessage($enemies, $members);
 
-  $deathCnt = 0;
-  foreach ($members as $member) {
-    if ($member->getHitPoint() > 0) {
-      $isFinishFlg = false;
-      break;
-    }
-    $deathCnt++;
-  }
-  if ($deathCnt === count($members)) {
-    $isFinishFlg = true;
-    echo "GAME OVER ....\n\n";
+  $isFinishFlg = isFinish($members);
+  if ($isFinishFlg) {
+    $message = "GAME OVER .....\n\n";
     break;
   }
 
-  $deathCnt = 0;
-  foreach ($enemies as $enemy) {
-    if ($enemy->getHitPoint() > 0) {
-      $isFinishFlg = false;
-      break;
-    }
-    $deathCnt++;
-  }
-  if ($deathCnt === count($enemies)) {
-    $isFinishFlg = true;
-    echo "勝利！\n";
+  $isFinishFlg = isFinish($enemies);
+  if ($isFinishFlg) {
+    $message = "♪♪♪ファンファーレ♪♪♪\n\n";
     break;
   }
 
   $turn++;
 }
 
-echo "終了\n";
+echo "戦闘終了\n";
+echo $message;
 $messageObj->displayStatusMessage($members);
 $messageObj->displayStatusMessage($menemies);
