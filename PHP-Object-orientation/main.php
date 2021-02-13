@@ -38,9 +38,9 @@ while (!$isFinishFlg) {
     $enemy = $enemies[$enemyIndex];
 
     if (get_class($member) == "WhiteMage") {
-      $member->doAttackWhiteMage($enemy, $member);
+      $member->doAttackWhiteMage($enemy, $members);
     } else {
-      $member->doAttack($enemy);
+      $member->doAttack($enemies);
     }
     echo "\n";
   }
@@ -49,7 +49,7 @@ while (!$isFinishFlg) {
   foreach ($enemies as $enemy) {
     $memberIndex = rand(0, count($members) - 1);
     $member = $members[$memberIndex];
-    $enemy->doAttack($member);
+    $enemy->doAttack($members);
     echo "\n";
   }
 
