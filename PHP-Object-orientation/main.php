@@ -5,20 +5,20 @@ require_once('./classes/Enemy.php');
 require_once('./classes/Brave.php');
 
 // インスタンス化
-$tiida = new Brave();
-$goblin = new Enemy();
+$tiida = new Brave("ティーダ");
+$goblin = new Enemy("ゴブリン");
 
-$tiida->name = "ティーダ";
-$goblin->name = "ゴブリン";
+// $tiida->name = "ティーダ";
+// $goblin->name = "ゴブリン";
 
 $turn = 1;
 
-while ($tiida->hitPoint > 0 && $goblin->hitPoint > 0) {
+while ($tiida->getHitPoint() > 0 && $goblin->getHitPoint() > 0) {
   echo "*** $turn ターン目 ***\n\n";
 
   // const定数で定義した値を参照する場合は $tiida::MAX_HITPOINT のように -> ではなく :: で参照する
-  echo $tiida->name . ":" . $tiida->hitPoint . "/" . $tiida::MAX_HITPOINT . "\n";
-  echo $goblin->name . ":" . $goblin->hitPoint . "/" . $goblin::MAX_HITPOINT . "\n";
+  echo $tiida->getName() . ":" . $tiida->getHitPoint() . "/" . $tiida::MAX_HITPOINT . "\n";
+  echo $goblin->getName() . ":" . $goblin->getHitPoint() . "/" . $goblin::MAX_HITPOINT . "\n";
   echo "\n";
 
   // 攻撃
@@ -31,5 +31,5 @@ while ($tiida->hitPoint > 0 && $goblin->hitPoint > 0) {
 }
 
 echo "終了\n";
-echo $tiida->name . " : " . $tiida->hitPoint . "/" . $tiida::MAX_HITPOINT . "\n";
-echo $goblin->name . " : " . $goblin->hitPoint . "/" . $goblin::MAX_HITPOINT . "\n";
+echo $tiida->getName() . " : " . $tiida->getHitPoint() . "/" . $tiida::MAX_HITPOINT . "\n";
+echo $goblin->getName() . " : " . $goblin->getHitPoint() . "/" . $goblin::MAX_HITPOINT . "\n";
