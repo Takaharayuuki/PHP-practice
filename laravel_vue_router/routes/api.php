@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/user', function (Request $request) {
-    $users = App\User::all();
+    $users = \App\Models\User::all();
 
     return response()->json(['users' => $users]);
 });
