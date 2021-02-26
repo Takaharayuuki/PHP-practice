@@ -3,6 +3,7 @@ import Home from './views/Home.vue'
 import About from './views/About.vue'
 import NotFound from './views/NotFound.vue'
 import User from './views/User.vue'
+import UserDetail from './views/UserDetail.vue'
 
 export default new Router({
   mode: 'history',
@@ -25,6 +26,11 @@ export default new Router({
       path: '/user',
       name: 'user',
       component: User
-    }
+    },
+    {
+      path: '/user/:id',
+      name: 'user_detail',
+      component: UserDetail
+    },
   ]
 });

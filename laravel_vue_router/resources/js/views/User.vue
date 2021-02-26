@@ -2,11 +2,7 @@
     <div>
         <h1>ユーザー覧</h1>
         <ul>
-            <li
-            v-for="user in users"
-            :key="user.id"
-            v-text="user.name"
-            ></li>
+            <li v-for="user in users" :key="user.id">{{ user.name }}　<router-link :to="`user/${user.id}`">詳細</router-link></li>
         </ul>
     </div>
 </template>
