@@ -27,3 +27,9 @@ Route::get('/user', function (Request $request) {
 Route::get('/user/{user}', function(\App\Models\User $user) {
     return response()->json(['user' => $user ]);
 });
+
+Route::patch('/user/{user}', function(\App\Models\User $user,Request $request){
+    $user->update($request->user);
+
+    return response()->json(['user' => $user]);
+});
