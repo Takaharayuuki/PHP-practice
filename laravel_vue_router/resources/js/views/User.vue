@@ -2,11 +2,13 @@
     <div>
         <h1>ユーザー覧</h1>
         <ul>
-            <li v-for="user in users" :key="user.id">{{ user.name }}　<router-link :to="`user/${user.id}`">詳細</router-link>
-              <router-link :to="`user/${user.id}/edit`">更新</router-link></li>
+            <li class="mb-1" v-for="(user,index) in users" :key="user.id">{{ user.name }}   　<router-link class="btn btn-success" :to="`user/${user.id}`">詳細</router-link>
+              <router-link class="btn btn-success" :to="`user/${user.id}/edit`">更新</router-link>
+              <span class="btn btn-danger" @click="userDelete(index, user.id)" style="cursor: pointer;">削除</span></li>
         </ul>
     </div>
 </template>
+
 <script>
 export default {
     data(){
@@ -22,6 +24,15 @@ export default {
         .catch(error => {
             console.log(error)
         });
+    },
+    methods: {
+        userDelete(index,id) {
+            axios.delete('/api/user/' + id)
+            .then(response => {
+                this.users.slice(id, 1)
+            })
+            .catch(error => console.log(error));
+        }
     },
 }
 </script>
