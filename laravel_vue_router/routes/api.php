@@ -24,19 +24,24 @@ Route::get('/user', function (Request $request) {
     return response()->json(['users' => $users]);
 });
 
-Route::get('/user/{user}', function(\App\Models\User $user) {
-    return response()->json(['user' => $user ]);
+Route::get('/user/{user}', function (\App\Models\User $user) {
+    return response()->json(['user' => $user]);
 });
 
-Route::patch('/user/{user}', function(\App\Models\User $user,Request $request){
+Route::patch('/user/{user}', function (\App\Models\User $user, Request $request) {
     $user->update($request->user);
 
     return response()->json(['user' => $user]);
 });
 
-Route::delete('/user/{user}', function(\App\Models\User $user) {
+Route::post('/user', function (Request $request) {
+    $user = \App\Models\User::create($request->user);
+
+    return response()->json(['user' => $user]);
+});
+
+Route::delete('/user/{user}', function (\App\Models\User $user) {
     $user->delete();
 
     return response()->json(['message' => 'deletesuccessfully']);
 });
-    
