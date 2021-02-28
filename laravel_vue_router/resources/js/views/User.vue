@@ -45,7 +45,8 @@ export default {
       axios
         .delete("/api/user/" + id)
         .then((response) => {
-          this.users.slice(id, 1);
+          console.log(typeof this.users);
+          this.users.splice(index, 1);
         })
         .catch((error) => console.log(error));
     },
