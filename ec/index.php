@@ -1,3 +1,5 @@
+<?php require_once 'products.php' ?>
+<?php require_once 'functions.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,14 +13,16 @@
     <div class="app-container">
       <h1 class="title">Shopping</h1>
       <div class="cards-container">
+      <?php foreach($products as $product): ?>
         <div class="card">
-          <img class="card-image" src="https://dnbz0c2oupsw6.cloudfront.net/bcekt8ctzrsfdj1gsus49v9tnhqu" alt="">
-          <p class="card-title">ミネラルウォーター</p>
+          <img class="card-image" src="<?php echo $product["image"]; ?> " alt="">
+          <p class="card-title"><?php echo $product["name"]; ?></php>
           <div class="flex justify-between">
-            <p class="card-price">230円</p>
+            <p class="card-price"><?php echo displayPrice($product["price"]); ?></p>
             <input min="0" class="item-number" type="number" value="0">
           </div>
         </div>
+        <?php endforeach; ?>
       </div>
       <div class="btn-footer bg-white">
         <input class="cart-btn" type="submit" name="submit" value="カートに追加" />
