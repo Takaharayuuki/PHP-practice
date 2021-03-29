@@ -1,4 +1,10 @@
-<?php require_once 'products.php'; ?>
+<?php require_once 'products.php';
+$sum = 0;
+foreach($products as $product) {
+  $price = $product["price"] * $_POST[$product["id"]];
+  $sum = $sum + $price;
+}
+?>
 <?php require_once 'functions.php'; ?>
 
 <!DOCTYPE html>
@@ -15,6 +21,7 @@
       <h1 class="title">Shopping Cart</h1>
       <div class="carts-container">
       <?php foreach($products as $product): ?>
+      <?php if ($_POST[$product["id"]] > 0): ?>
         <div class="cart-item">
           <div class="flex">
             <img class="cart-item-img" src="<?php echo $product["image"]; ?>">
@@ -24,9 +31,10 @@
             </div>
           </div>
         </div>
+      <?php endif; ?>
       <?php endforeach; ?>
       <div class="btn-footer bg-gray">
-        <input class="checkout-btn" type="submit" value="決済する">
+        <input class="checkout-btn" type="submit" value="<?php echo calPriceIncludeTax($sum) ."円を決済する" ?>">
       </div>
     </div>
   </div>
