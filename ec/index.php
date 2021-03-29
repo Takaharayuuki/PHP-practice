@@ -17,11 +17,11 @@
         <div class="cards-container">
         <?php foreach($products as $product): ?>
           <div class="card">
-            <img class="card-image" src="<?php echo $product["image"]; ?> " alt="">
-            <p class="card-title"><?php echo $product["name"]; ?></php>
+            <img class="card-image" src="<?php echo $product->getImage(); ?> " alt="">
+            <p class="card-title"><?php echo $product->getName(); ?></php>
             <div class="flex justify-between">
-              <p class="card-price"><?php echo displayPrice($product["price"]); ?></p>
-              <input name="<?php echo $product["id"]; ?>" min="0" class="item-number" type="number" value="0">
+              <p class="card-price"><?php echo displayPrice($product->getPrice()); ?></p>
+              <input name="<?php echo $product->getId(); ?>" min="0" class="item-number" type="number" value="0">
             </div>
           </div>
           <?php endforeach; ?>
