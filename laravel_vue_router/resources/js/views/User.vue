@@ -4,9 +4,8 @@
     <router-link class="btn btn-primary" to="/user/create">作成</router-link>
     <ul>
       <li class="mb-1" v-for="(user, index) in users" :key="user.id">
-        {{ user.name }} 　<router-link
-          class="btn btn-success"
-          :to="`user/${user.id}`"
+        {{ user.name }}
+        <router-link class="btn btn-success" :to="`user/${user.id}`"
           >詳細</router-link
         >
         <router-link class="btn btn-success" :to="`user/${user.id}/edit`"
