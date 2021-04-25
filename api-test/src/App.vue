@@ -2,7 +2,7 @@
   <div class="search-ip">
     <div>
       <div>
-        <input @click="getIp" type="button" value="IPを取得" />
+        <input @click="getIp()" type="button" value="IPを取得" />
       </div>
       <h3>IP</h3>
       <p>{{ state.data }}</p>
@@ -11,16 +11,19 @@
 </template>
 
 <script lang="ts">
+// 使用するreactiveの追加
 import { defineComponent, reactive } from "vue";
+// axiosのインポート
 import axios from "axios";
 
 export default defineComponent({
   name: "SearchIp",
   setup() {
+    // 空のデータをいれるプロパティを用意
     const state = reactive<{ data: string }>({
       data: "",
     });
-
+    // IPアドレスを取得する関数を定義
     const getIp = () => {
       axios
         .get("https://httpbin.org/get")
