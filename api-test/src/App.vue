@@ -4,8 +4,14 @@
       <div>
         <input @click="getIp()" type="button" value="IPを取得" />
       </div>
-      <h3>IP</h3>
+      <h3>Get IP</h3>
       <p>{{ state.data }}</p>
+    </div>
+    <div>
+      <div>
+        <input @click="getTime()" type="button" value="現在時刻を取得" />
+      </div>
+      <h3>現在時刻: {{ state.time }}</h3>
     </div>
   </div>
 </template>
@@ -20,9 +26,11 @@ export default defineComponent({
   name: "SearchIp",
   setup() {
     // 空のデータをいれるプロパティを用意
-    const state = reactive<{ data: string }>({
+    const state = reactive<{ data: string; time: string }>({
       data: "",
+      time: "",
     });
+
     // IPアドレスを取得する関数を定義
     const getIp = () => {
       axios
@@ -37,9 +45,18 @@ export default defineComponent({
         });
     };
 
+    // const getTime = () => {
+    //   axios.get("https://ntp-a1.nict.go.jp/cgi-bin/json").then((response) => {
+    //     console.log(response);
+    //     state.time = response.data;
+    //     return state.time;
+    //   });
+    // };
+
     return {
       state,
       getIp,
+      // getTime,
     };
   },
 });
