@@ -18,20 +18,37 @@
     <li>JSONデータとしてエンコードしてからもらう</li>
     <li>クロスドメイン対策の設定が必要</li>
   </ul>
-  <div id="contents"></div>
+  <div id="app">
+    <dl v-for="user in userData" :key="user.id">
+      <dt>お名前</dt>
+      <dd>{{ user.USER_NAME }}</dd>
+      <dt>フリガナ</dt>
+      <dd>{{ user.USER_NAME_KANA }}</dd>
+      <dt>メールアドレス</dt>
+      <dd>{{ user.USER_EMAIL }}</dd>
+      <dt>パスワード</dt>
+      <dd>{{ user.USER_PASSWORD }}</dd>
+      <dt>電話番号</dt>
+      <dd>{{ user.USER_TEL }}</dd>
+      <dt>住所</dt>
+      <dd>{{ user.USER_ADDRESS }}</dd>
+    </dl>
+  </div>
 
-
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
   <script>
-    $(function() {
-      $.getJSON('./sample.php', function(data) {
-        Object.keys(data).forEach(function(key) {
-          $('#contents').append('<ul id="' + key + '">');
-          data[key].forEach(function (value, index, array) {
-            $(`#${key}`).append('<li>' + value + '</li>');
-          });
-        });
-      });
-    });
+  let app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello',
+      userData: '',
+    },
+
+    mounted() {
+      axios.get('./sample.php').then(response => (this.userData = response.data, console.log(this.userData)))
+    }
+  })
   </script>
 </body>
 </html>
