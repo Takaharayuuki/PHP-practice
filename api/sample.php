@@ -1,28 +1,24 @@
-<?php 
+<?php
 
-$array = [
-  'tokyo' => [
-      '品川',
-      '五反田',
-      '三軒茶屋',
-      '四谷'
-  ],
-  'kanagawa' => [
-      '横浜',
-      '相模原',
-      '湘南',
-      '鎌倉'
-  ],
-  'saitama' => [
-      '所沢',
-      '狭山',
-      '川口',
-      '浦和',
-      '小手指',
-      '飯能'
-  ]
-  ];
+$rec = array();
 
-  header("Access-Control-Allow-Origin: *");
+$rec['USER_EMAIL'] = 'test@test.com';
+$rec['USER_PASSWORD'] = 'test1234';
+$rec['USER_NAME'] = '田中太郎';
+$rec['USER_NAME_KANA'] = 'タナカタロウ';
+$rec['USER_TEL'] = '00012345678';
+$rec['USER_ADDRESS'] = '東京都東池袋';
 
-  echo json_encode($array);
+$array = array();
+
+$array[] = $rec;
+$array[] = $rec;
+$array[] = $rec;
+$array[] = $rec;
+$array[] = $rec;
+
+$data = $array;
+
+header("Access-Control-Allow-Origin: *");
+
+echo json_encode($data);
