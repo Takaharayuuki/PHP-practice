@@ -21,7 +21,7 @@
 
   <article>
     <?php while ($memo = $memos->fetch()) : ?>
-      <p><a href="./memo.php"><?php print(mb_substr($memo['memo'], 0, 50)); ?></a></p>
+      <p><a href="memo.php?id=<?php echo $memo['id'] ?>"><?php print(mb_substr($memo['memo'], 0, 50)); ?></a></p>
       <p><?php print($memo['created_at']); ?></p>
       <hr>
     <?php endwhile; ?>
