@@ -1,9 +1,25 @@
 <?php
 session_start();
+require('../dbConnect.php');
 
 if (!isset($_SESSION['join'])) {
 	header('Location: index.php');
 	exit;
+}
+
+if (!empty($_POST)) {
+	$statement = $db->prepare('INSERT INTO members SET name=?, email=?, password=?, picture=?, created=NOW()');
+	$statement->execute(array(
+		$_SESSION['join']['name'],
+		$_SESSION['join']['email'],
+		sha1($_SESSION['join']['password']),
+		$_SESSION['join']['image'],
+	));
+	// セッションのリセット
+	unset($_SESSION['join']);
+
+	header('Location: thanks.php');
+	exit();
 }
 ?>
 
