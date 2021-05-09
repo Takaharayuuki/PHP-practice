@@ -1,7 +1,13 @@
 <?php
 session_start();
+require('../templates/dbConnect.php');
 
 if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
+  $_SESSION['time'] = time();
+
+  $members = $db->prepare('SELECT * FROM members WHERE id=?');
+  $members->execute(array($_SESSION['id']));
+  $member = $members->fetch();
 } else {
   header('Location: login.php');
   exit();
@@ -30,7 +36,7 @@ if (isset($_SESSION['id']) && $_SESSION['time'] + 3600 > time()) {
       <div style="text-align: right"><a href="logout.php">ログアウト</a></div>
       <form action="" method="post">
         <dl>
-          <dt>○○さん、メッセージをどうぞ</dt>
+          <dt><?php print(htmlspecialchars($member['name'], ENT_QUOTES)); ?> さん、メッセージをどうぞ</dt>
           <dd>
             <textarea name="message" cols="50" rows="5"></textarea>
             <input type="hidden" name="reply_post_id" value="" />
