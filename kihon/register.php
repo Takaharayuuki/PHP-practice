@@ -3,8 +3,8 @@ require_once('config.php');
 
 $name = $_POST['name'];
 $mail = $_POST['mail'];
-$password =  password_hash($_POST['password'], PASSWORD_DEFAULT);
-
+$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+var_dump($password);
 try {
   $dbh = new PDO(DSN, DB_USER, DB_PASS);
 } catch (PDOException $e) {
@@ -29,7 +29,7 @@ if ($member['mail'] === $mail) {
   $stmt->bindValue(':password', $password);
   $stmt->execute();
   $msg = '会員登録が完了しました';
-  $link = '<a href="login.php">ログインページ</a>';
+  $link = '<a href="login_form.php">ログインページ</a>';
 }
 
 ?>
